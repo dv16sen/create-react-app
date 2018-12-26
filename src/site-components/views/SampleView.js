@@ -1,28 +1,28 @@
-import React from "react";
+import React, {Fragment} from "react";
 
 export const SampleView = ({
-    bitcoinNews,
+    repositories,
     reduxSample,
     onSampleChange,
     children,
     ...props
 }) => {
-    const renderNews = () => {
-        if(!bitcoinNews.articles) return;
-
-        return bitcoinNews.articles.map((article, i) => (
-            <article key={i}>
-                <h2>{article.title}</h2>
-                <p>{article.description}</p>
-                <hr/>
-            </article>
-        ));
-    };
-
     return (
         <div {...props}>
             <button onClick={onSampleChange}>{reduxSample}</button>
-            {renderNews()}
+            <h1>Repositories</h1>
+            <hr/>
+            {repositories.map((repository, i) => (
+                <Fragment key={i}>
+                    <p>Created at: {repository.createdAt}</p>
+                    <p>Updated at: {repository.updatedAt}</p>
+                    <p>Language: {repository.language}</p>
+                    <p>Name: {repository.name}</p>
+                    <p>Description: {repository.description}</p>
+                    <p>Url: {repository.url}</p>
+                    <hr/>
+                </Fragment>
+            ))}
             {children}
         </div>
     );

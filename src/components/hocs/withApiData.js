@@ -1,7 +1,15 @@
 import React, {Component} from "react";
 import axios from "axios";
 
-export default (routes, defaultState = {}) => (WrappedComponent) => {
+export default ({routes, defaultState = {}, parsers = {}}) => (WrappedComponent) => {
+    const parse = {
+        ...Object.keys(routes).map(routeKey =>
+            (parsers[routeKey])
+                ? {[routeKey]: parsers[routeKey]}
+                : {[routeKey]: (key, data) => data}
+        ).reduce((acc, next) => ({...acc, ...next}))
+    };
+
     return class extends Component {
         state = {
             ...Object.keys(routes)
@@ -12,7 +20,7 @@ export default (routes, defaultState = {}) => (WrappedComponent) => {
         fetchApiData = async () => Promise.all(
             Object.keys(routes).map(routeKey =>
                 axios.get(routes[routeKey])
-                    .then(res => ({[routeKey]: res.data}))
+                    .then(res => ({[routeKey]: parse[routeKey](routeKey, res.data)}))
             )
         ).then(data => data.reduce((acc, next) => ({...acc, ...next})));
 

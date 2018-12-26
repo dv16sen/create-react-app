@@ -2,7 +2,7 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 import {initStore} from "./redux/store";
-import "./sass/style.scss";
+//import "./sass/style.scss";
 import * as serviceWorker from "./utils/serviceWorker";
 import {Router} from "./Router";
 import $ from "jquery";
