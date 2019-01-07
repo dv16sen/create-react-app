@@ -1,26 +1,29 @@
 import React, {Component} from "react";
 import axios from "axios";
 
-export default ({routes, defaultState = {}, parsers = {}}) => (WrappedComponent) => {
-    const parse = {
-        ...Object.keys(routes).map(routeKey =>
-            (parsers[routeKey])
-                ? {[routeKey]: parsers[routeKey]}
-                : {[routeKey]: (key, data) => data}
-        ).reduce((acc, next) => ({...acc, ...next}))
-    };
+export default (options) => (WrappedComponent) => {
+    const routes = Object
+        .keys(options)
+        .map(routeKey => ({
+            [routeKey]: {
+                ...options[routeKey],
+                defaultValue: (options[routeKey].defaultValue) ? options[routeKey].defaultValue : [],
+                parse: (options[routeKey].parse) ? options[routeKey].parse : (key, data) => data,
+                axiosConfig: (options[routeKey].axiosConfig) ? options[routeKey].axiosConfig : {}
+            }
+        }))
+        .reduce((acc, next) => ({...acc, ...next}));
 
     return class extends Component {
-        state = {
-            ...Object.keys(routes)
-                .map(routeKey => ({[routeKey]: []}))
-                .reduce((acc, next) => ({...acc, ...next})),
-            ...defaultState
-        };
+        state = Object
+            .keys(routes)
+            .map(routeKey => ({[routeKey]: routes[routeKey].defaultValue}))
+            .reduce((acc, next) => ({...acc, ...next}));
+
         fetchApiData = async () => Promise.all(
             Object.keys(routes).map(routeKey =>
-                axios.get(routes[routeKey])
-                    .then(res => ({[routeKey]: parse[routeKey](routeKey, res.data)}))
+                axios.get(routes[routeKey].route, routes[routeKey].axiosConfig)
+                    .then(res => ({[routeKey]: routes[routeKey].parse(routeKey, res.data)}))
             )
         ).then(data => data.reduce((acc, next) => ({...acc, ...next})));
 
@@ -35,6 +38,10 @@ export default ({routes, defaultState = {}, parsers = {}}) => (WrappedComponent)
                 }
             } catch(err){
                 console.error(err);
+                console.table(err);
+                if(this.mounted){
+                    this.setState({apiError: true});
+                }
             }
         }
 
