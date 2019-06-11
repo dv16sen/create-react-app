@@ -4,29 +4,23 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "enzyme": "^2.8.2",
-    "react-addons-test-utils": "^15.6.2",
-    "react-test-renderer": "16.2.0"
+    "enzyme": "^2.8.2"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "classnames": "^2.2.6",
-    "history": "^4.7.2",
+    "history": "^4.9.0",
     "lodash": "^4.17.11",
-    "jquery": "^3.3.1",
-    "mobx": "^5.0.3",
-    "mobx-react": "^5.2.3",
-    "node-sass": "^4.10.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.6.1",
-    "react-dom": "^16.6.1",
+    "node-sass": "^4.12.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
+    "react-scripts": "^3.0.1",
     "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.3.0"
+    "smnrkssn": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",
