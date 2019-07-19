@@ -1,7 +1,11 @@
 import React, {Fragment} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import {HomePage} from "./pages/HomePage";
-import {routes} from "./utils/constants/routes";
+
+export const routes = {
+    homePage: "/",
+
+};
 
 export const Router = () => (
     <BrowserRouter>

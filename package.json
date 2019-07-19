@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.5",
     "cross-env": "^5.2.0",
-    "enzyme": "^2.8.2"
+    "react-generate-props": "^0.5.0"
   },
   "dependencies": {
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "history": "^4.9.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -20,16 +22,15 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.1",
     "redux": "^3.7.2",
-    "smnrkssn": "^1.0.9"
+    "smnrkssn": "^1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "updateRoutes": "node scripts.js updateRoutes"
+    "updateRoutes": "node scripts/updateRoutes.js"
   },
-  "proxy": "http://localhost:8080",
   "eslintConfig": {
     "extends": "react-app"
   },
